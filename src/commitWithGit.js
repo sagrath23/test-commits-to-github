@@ -40,6 +40,8 @@ const makeACommit = async () => {
       resolve(data);
     });
   });
+
+  console.log(result, 'pushed changes');
 }; 
 
 module.exports = {
