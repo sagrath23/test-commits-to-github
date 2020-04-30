@@ -1,0 +1,22 @@
+{
+  "name": "test-commits-to-github",
+  "version": "1.0.0",
+  "description": "Probe of Concept to create a commit in a github repo programmatically",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npx jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagrath23/test-commits-to-github.git"
+  },
+  "author": "Steven Augusto Villevas <sagrath23@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sagrath23/test-commits-to-github/issues"
+  },
+  "homepage": "https://github.com/sagrath23/test-commits-to-github#readme",
+  "dependencies": {
+    "simple-git": "^2.2.0"
+  }
+}
