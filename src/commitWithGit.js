@@ -1,10 +1,12 @@
-import git from 'simple-git';
+const git = require('simple-git');
 
-export const makeACommit = async () => {
+const makeACommit = async () => {
 
   // add a file to stage
   const result = await new Promise((resolve, reject) => {
-    git.add(['../test.csv'], (error, data) => {
+    // git function receive a path param, that can be assumed as the 
+    // current path if it is not provided
+    git().add(['test.csv'], (error, data) => {
       if(error) {
         reject(error);
       }
@@ -15,3 +17,7 @@ export const makeACommit = async () => {
 
   console.log(result);
 }; 
+
+module.exports = {
+  makeACommit
+};
