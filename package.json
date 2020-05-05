@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/sagrath23/test-commits-to-github#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.0",
     "simple-git": "^2.2.0"
   }
 }

@@ -1,2 +1,8 @@
 # npm packages
 node_modules
+
+#temporary config file
+src/config.js
+
+# dotenv file
+.env

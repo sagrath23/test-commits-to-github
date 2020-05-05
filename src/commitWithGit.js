@@ -1,47 +1,27 @@
-const git = require('simple-git');
+require('dotenv').config();
+const gitRequester = require('simple-git/promise');
+
+const setupGit = async (basePath) => {
+  const git = gitRequester(basePath);
+
+  console.log(process.env.GH_TOKEN, 'da token');
+
+  return git;
+}
 
 const makeACommit = async () => {
+  const git = await setupGit();
 
   // add a file to stage
-  let result = await new Promise((resolve, reject) => {
-    // git function receive a path param, that can be assumed as the 
-    // current path if it is not provided
-    git().add(['test.csv'], (error, data) => {
-      if(error) {
-        reject(error);
-      }
-
-      resolve(data);
-    });
-  });
-
-  console.log(result, 'stage file');
-
+  await git.add(['test.csv']);
   // commit the changes
-  result = await new Promise((resolve, reject) => {
-    git().commit('add changes automatically', (error, data) => {
-      if(error) {
-        reject(error);
-      }
-
-      resolve(data);
-    });
-  });
+  let result = await git.commit('add changes automatically');
 
   console.log(result, 'commit changes');
-
   // push to repo
-  result = await new Promise((resolve, reject) => {
-    git().push('origin', 'master', (error, data) => {
-      if(error) {
-        reject(error);
-      }
+  await git.push('origin', 'master');
 
-      resolve(data);
-    });
-  });
-
-  console.log(result, 'pushed changes');
+  console.info('push finished');
 }; 
 
 module.exports = {
