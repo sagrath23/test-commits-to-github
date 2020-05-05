@@ -4,7 +4,13 @@ const gitRequester = require('simple-git/promise');
 const setupGit = async (basePath) => {
   const git = gitRequester(basePath);
 
-  await git.addConfig('credential.helper', 'store');
+  let config = await git.listConfig();
+  // TODO: validate if config exists, in order to avoid overwrite it
+
+  console.log(config, 'prev config');
+
+  // await git.addConfig('credential.helper', 'store');
+
 
   // TODO: Check how to log in into github
 
@@ -14,10 +20,10 @@ const setupGit = async (basePath) => {
 
   await git.addConfig('user.email', process.env.GH_EMAIL);
 
-  const config = await git.listConfig();
+  config = await git.listConfig();
 
   console.log(config, 'da config');
-  
+
   return git;
 };
 
