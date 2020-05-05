@@ -1,15 +1,13 @@
 require('dotenv').config();
 const gitRequester = require('simple-git/promise');
 
+
 const setupGit = async (basePath) => {
   const git = gitRequester(basePath);
 
-  let config = await git.listConfig();
   // TODO: validate if config exists, in order to avoid overwrite it
 
-  console.log(config, 'prev config');
-
-  // await git.addConfig('credential.helper', 'store');
+  await git.addConfig('credential.helper', 'store');
 
 
   // TODO: Check how to log in into github
@@ -20,16 +18,23 @@ const setupGit = async (basePath) => {
 
   await git.addConfig('user.email', process.env.GH_EMAIL);
 
-  config = await git.listConfig();
-
-  console.log(config, 'da config');
-
   return git;
+};
+
+const cloneRepo = async () => {
+  const git = await setupGit();
+  const repoPath = `https://${process.env.GH_USER}:${process.env.GH_TOKEN}@github.com/${process.env.GH_CSV_REPO_PATH}`;
+
+  // clone the repo
+  await git.clone(repoPath);
 };
 
 const makeACommit = async () => {
   const files = ['test.csv'];
   const git = await setupGit();
+
+  // clone csv repo
+  await cloneRepo();
 
   // add a file to stage
   await git.add(files);
