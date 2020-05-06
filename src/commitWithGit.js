@@ -37,7 +37,7 @@ const makeACommit = async () => {
 
   // promisify fs functions & move new file to csv folder
   const copyFile = util.promisify(fs.copyFile);
-  const result = await copyFile('./test.csv', './test-csv');
+  let result = await copyFile('./test.csv', './test-csv/test.csv');
 
   // add files to commit
   const files = ['test.csv'];
@@ -46,7 +46,7 @@ const makeACommit = async () => {
   // add a file to stage
   await git.add(files);
   // commit the changes
-  let result = await git.commit(
+  result = await git.commit(
     'add changes automatically',
     files,
     {
