@@ -6,15 +6,6 @@ const gitRequester = require('simple-git/promise');
 
 const setupGit = async (basePath) => {
   const git = gitRequester(basePath);
-
-  // TODO: validate if config exists, in order to avoid overwrite it
-
-  await git.addConfig('credential.helper', 'store');
-
-
-  // TODO: Check how to log in into github
-
-
   // add name, email and all the config to push a signed commit
   await git.addConfig('user.name', process.env.GH_USER_NAME);
 
