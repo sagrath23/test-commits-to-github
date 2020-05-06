@@ -1,4 +1,6 @@
 require('dotenv').config();
+const util = require('util');
+const fs = require('fs');
 const gitRequester = require('simple-git/promise');
 
 
@@ -30,11 +32,16 @@ const cloneRepo = async () => {
 };
 
 const makeACommit = async () => {
-  const files = ['test.csv'];
-  const git = await setupGit();
-
   // clone csv repo
   await cloneRepo();
+
+  // promisify fs functions & move new file to csv folder
+  const copyFile = util.promisify(fs.copyFile);
+  const result = await copyFile('./test.csv', './test-csv');
+
+  // add files to commit
+  const files = ['test.csv'];
+  const git = await setupGit('./test-csv');
 
   // add a file to stage
   await git.add(files);
