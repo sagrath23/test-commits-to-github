@@ -1,10 +1,5 @@
+require('dotenv').config();
 const fetch = require('node-fetch');
-
-/*
-Agus Code: 
-
-require('dotenv').config()
-const axios = require('axios');
 
 const ghToken = process.env.GH_TOKEN;
 const owner = process.env.GH_OWNER;
@@ -13,14 +8,13 @@ const repo = process.env.GH_REPO;
 const baseUrl = `https://api.github.com/repos/${owner}/${repo}/git`;
 
 async function request(method, uri, body) {
-  const response = await axios({
-    method,
-    url: `${baseUrl}/${uri}`,
+  const response = await fetch(`${baseUrl}/${uri}`, {
+    body: JSON.stringify(body),
     headers: {
       Authorization: `token ${ghToken}`,
       Accept: 'application/vnd.github.v3+json'
     },
-    data: JSON.stringify(body)
+    method
   });
 
   return response.data;
@@ -46,7 +40,7 @@ function updateBranchReference(branchName, newSha) {
   return request('patch', `refs/heads/${branchName}`, { sha: newSha });
 }
 
-async function createNewCommit() {
+async function makeACommitWithAPI() {
   // Modify this constants to modify commit changes
   const BRANCH = 'master';
   const COMMIT_MESSAGE = 'Automatic commit';
@@ -78,18 +72,7 @@ async function createNewCommit() {
   console.log('SUCCESSFUL NEW COMMIT');
 }
 
-(async () => {
-  try {
-    await createNewCommit();
-  } catch (e) {
-    console.error(e);
-  }
-})();
-*/ 
 
-const makeACommitWithAPI = () => {
-  console.log('github token');
-}
 
 module.exports = {
   makeACommitWithAPI
