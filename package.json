@@ -19,6 +19,6 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.0",
-    "simple-git": "^2.3.0"
+    "simple-git": "^3.16.0"
   }
 }
